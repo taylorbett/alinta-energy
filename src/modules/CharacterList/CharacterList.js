@@ -37,7 +37,8 @@ class CharacterList extends React.Component {
         let output = [];
         movies.forEach(movie => {
             movie.roles.forEach(role => {
-                if (!output.filter(item => item.actor === role.actor).length) {
+                let existingEntries = output.filter(item => item.actor === role.actor);
+                if (!existingEntries.length) {
                     if (role.actor !== undefined && role.actor) output.push({
                         actor: role.actor,
                         roles: [
@@ -47,8 +48,8 @@ class CharacterList extends React.Component {
                             }
                         ]
                     });
-                } else {
-                    output.filter(item => item.actor === role.actor)[0].roles.push({
+                } else if (!existingEntries[0].roles.filter(item => item.character === role.name).length) {
+                    existingEntries[0].roles.push({
                         movie: movie.name || '',
                         character: role.name
                     });
