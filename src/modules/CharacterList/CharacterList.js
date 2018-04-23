@@ -8,10 +8,15 @@ class CharacterList extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            sortRolesBy: 'movie',
+        }
+
         this.fetchMovies = this.fetchMovies.bind(this);
         this.sortByActor = this.sortByActor.bind(this);
         this.renderRoles = this.renderRoles.bind(this);
         this.renderActors = this.renderActors.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
     
     componentDidMount() {
@@ -54,18 +59,18 @@ class CharacterList extends React.Component {
         return output;
     }
 
-    renderRoles(actor, sortParam = 'movie') {
+    renderRoles(actor) {
         return actor.roles.sort((a, b) => {
-            const strA = a[sortParam].toLowerCase();
-            const strB = b[sortParam].toLowerCase();
+            const strA = a[this.state.sortRolesBy].toLowerCase();
+            const strB = b[this.state.sortRolesBy].toLowerCase();
             if (strA < strB) return -1;
             if (strA > strB) return 1;
             return 0;
         }).map((role, index) => {
             return (
                 <li key={index}>{role.character}</li>
-            )
-        })
+            );
+        });
     }
 
     renderActors() {
@@ -79,7 +84,13 @@ class CharacterList extends React.Component {
                 </React.Fragment>
             )
         })
-    } 
+    }
+
+    handleChange(event) {
+        this.setState({
+            sortRolesBy: event.target.value
+        });
+    }
     
     render() {
         if (!this.props.movies.data.length) {
@@ -88,6 +99,13 @@ class CharacterList extends React.Component {
 
         return (
             <div className="character-list">
+                <label>
+                    Sort roles by
+                    <select value={this.state.sortRolesBy} onChange={this.handleChange} name="role-sort">
+                        <option value="movie">movie</option>
+                        <option value="character">character</option>
+                    </select>
+                </label>
                 {this.renderActors()}
             </div>
         );
