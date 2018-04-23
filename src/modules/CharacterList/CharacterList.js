@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class CharacterList extends React.Component {
     render() {
@@ -10,4 +11,16 @@ class CharacterList extends React.Component {
     }
 }
 
-export default CharacterList;
+function mapStateToProps(state) {
+    return {
+        movies: state.movies,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchMovies: () => dispatch({ type: 'FETCH_MOVIES' }),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CharacterList);
