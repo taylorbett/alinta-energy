@@ -37,14 +37,14 @@ class CharacterList extends React.Component {
                         actor: role.actor,
                         roles: [
                             {
-                                movie: movie.name,
+                                movie: movie.name || '',
                                 character: role.name
                             }
                         ]
                     });
                 } else {
                     output.filter(item => item.actor === role.actor)[0].roles.push({
-                        movie: movie.name,
+                        movie: movie.name || '',
                         character: role.name
                     });
                 }
@@ -54,8 +54,14 @@ class CharacterList extends React.Component {
         return output;
     }
 
-    renderRoles(actor) {
-        return actor.roles.map((role, index) => {
+    renderRoles(actor, sortParam = 'movie') {
+        return actor.roles.sort((a, b) => {
+            const strA = a[sortParam].toLowerCase();
+            const strB = b[sortParam].toLowerCase();
+            if (strA < strB) return -1;
+            if (strA > strB) return 1;
+            return 0;
+        }).map((role, index) => {
             return (
                 <li key={index}>{role.character}</li>
             )
