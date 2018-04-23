@@ -1,8 +1,9 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-header {
+  text-align: center;
   background-color: #222;
   padding: 6px;
   color: white;
@@ -19,4 +20,8 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.character-list {
+  padding: 12px 20px;
 }
