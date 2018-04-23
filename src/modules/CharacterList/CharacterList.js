@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import * as MoviesActions from '../../actions/moviesActions';
 
@@ -56,7 +57,6 @@ class CharacterList extends React.Component {
                 }
             })
         });
-        console.log(output);
         return output;
     }
 
@@ -124,6 +124,13 @@ function mapDispatchToProps(dispatch) {
         actions: bindActionCreators(MoviesActions, dispatch),
         dispatch,
     };
+}
+
+CharacterList.propTypes = {
+    movies: PropTypes.shape({
+        isFetching: PropTypes.bool,
+        data: PropTypes.array,
+    }).isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CharacterList);
