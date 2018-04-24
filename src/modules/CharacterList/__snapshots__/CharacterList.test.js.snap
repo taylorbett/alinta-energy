@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="character-list"
+>
+  <label>
+    Sort roles by
+    <select
+      name="role-sort"
+      onChange={[Function]}
+      value="movie"
+    >
+      <option
+        value="movie"
+      >
+        movie
+      </option>
+      <option
+        value="character"
+      >
+        character
+      </option>
+    </select>
+  </label>
+  <p>
+    Eddie Murphy
+  </p>
+  <ul>
+    <li>
+      Axel Foley
+    </li>
+  </ul>
+  <p>
+    Judge Reinhold
+  </p>
+  <ul>
+    <li>
+      Billy Rosewood
+    </li>
+  </ul>
+  <p>
+    Wil Wheaton
+  </p>
+  <ul>
+    <li>
+      Gorgie Lachance
+    </li>
+  </ul>
+  <p>
+    Mila Kunis
+  </p>
+  <ul>
+    <li>
+      Meg Griffin
+    </li>
+  </ul>
+  <p>
+    Seth Green
+  </p>
+  <ul>
+    <li>
+      Chris Griffin
+    </li>
+  </ul>
+  <p>
+    Keifer Sutherland
+  </p>
+  <ul>
+    <li>
+      Dr Barry Wolfson
+    </li>
+  </ul>
+</div>
+`;

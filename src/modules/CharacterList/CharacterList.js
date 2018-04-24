@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { sortByActor }  from '../../util/moviesUtil';
 import * as MoviesActions from '../../actions/moviesActions';
 
-class CharacterList extends React.Component {
+export class CharacterList extends React.Component {
     constructor(props) {
         super(props);
 
