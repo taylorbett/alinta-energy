@@ -1,5 +1,8 @@
 export const sortByActor = (movies) => {
     let output = [];
+    if (movies === undefined || !movies || !movies.length) {
+        return output;
+    }
     movies.forEach(movie => {
         movie.roles.forEach(role => {
             let existingEntries = output.filter(item => item.actor === role.actor);

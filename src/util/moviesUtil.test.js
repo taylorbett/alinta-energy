@@ -125,4 +125,19 @@ describe('moviesUtil', () => {
         }];
         expect(sortByActor(movies)).toEqual(expectedOutput);
     });
+
+    it('should handle undefined input', () => {
+        const expectedOutput = [];
+        expect(sortByActor()).toEqual(expectedOutput);
+    });
+
+    it('should handle null input', () => {
+        const expectedOutput = [];
+        expect(sortByActor(null)).toEqual(expectedOutput);
+    });
+
+    it('should handle empty input', () => {
+        const expectedOutput = [];
+        expect(sortByActor([])).toEqual(expectedOutput);
+    });
 });
