@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
+import { sortByActor }  from '../../util/moviesUtil';
 import * as MoviesActions from '../../actions/moviesActions';
 
 class CharacterList extends React.Component {
@@ -14,7 +15,6 @@ class CharacterList extends React.Component {
         }
 
         this.fetchMovies = this.fetchMovies.bind(this);
-        this.sortByActor = this.sortByActor.bind(this);
         this.renderRoles = this.renderRoles.bind(this);
         this.renderActors = this.renderActors.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -34,32 +34,6 @@ class CharacterList extends React.Component {
         this.props.dispatch(MoviesActions.fetchMoviesSuccess(requestData));
     }
 
-    sortByActor(movies) {
-        let output = [];
-        movies.forEach(movie => {
-            movie.roles.forEach(role => {
-                let existingEntries = output.filter(item => item.actor === role.actor);
-                if (!existingEntries.length) {
-                    if (role.actor !== undefined && role.actor) output.push({
-                        actor: role.actor,
-                        roles: [
-                            {
-                                movie: movie.name || '',
-                                character: role.name
-                            }
-                        ]
-                    });
-                } else if (!existingEntries[0].roles.filter(item => item.character === role.name).length) {
-                    existingEntries[0].roles.push({
-                        movie: movie.name || '',
-                        character: role.name
-                    });
-                }
-            })
-        });
-        return output;
-    }
-
     renderRoles(actor) {
         return actor.roles.sort((a, b) => {
             const strA = a[this.state.sortRolesBy].toLowerCase();
@@ -75,7 +49,8 @@ class CharacterList extends React.Component {
     }
 
     renderActors() {
-        return this.sortByActor(this.props.movies.data).map((item, index) => {
+        // NOTE: transplant sortByActor call into reducer if this shape is expected throughout app
+        return sortByActor(this.props.movies.data).map((item, index) => {
             return (
                 <React.Fragment key={index}>
                     <p>{item.actor}</p>
